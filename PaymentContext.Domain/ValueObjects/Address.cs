@@ -1,4 +1,6 @@
-﻿using PaymentContext.Shared.ValueObjects;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects
 {
@@ -12,6 +14,11 @@ namespace PaymentContext.Domain.ValueObjects
             Neighborhood = neighborhood;
             Street = street;
             ZipCode = zipCode;
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsLowerThan(Street, 3, "Street", "A rua deve ter pelo menos 3 caracteres")
+            );
         }
 
         public string Country { get; private set; }
