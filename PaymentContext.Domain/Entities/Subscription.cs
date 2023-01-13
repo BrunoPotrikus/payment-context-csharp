@@ -10,7 +10,7 @@
             CreateDate = DateTime.Now;
             LastUpdateDate = DateTime.Now;
             ExpireDate = expireDate;
-            Payments = new List<Payment>();
+            _payment = new List<Payment>();
         }
 
         public bool Active { get; private set; }
@@ -27,6 +27,12 @@
         public void Activate()
         {
             Active = true;
+            LastUpdateDate = DateTime.Now;
+        }
+
+        public void Deactivate()
+        {
+            Active = false;
             LastUpdateDate = DateTime.Now;
         }
     }
